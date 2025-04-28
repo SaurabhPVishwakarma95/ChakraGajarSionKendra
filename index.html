@@ -1,0 +1,303 @@
+<html>
+<head>
+	<title>
+		Chakri Gajar
+	</title>
+</head>
+<body id="idBody">
+<main>
+	<article>
+	  
+		<div>
+			<h1 align="center">Chakri Gajar Sion Upasana Kendra</h1>		
+		</div>
+		<div style="width: 80%; height:auto;margin-left: 10%; margin-right: 10%;">
+			<b><h3 style="color: red;" align="center">Don't Miss Chakri Gajar on 08th May 2025</h3></b>
+		</div>
+		<div style="width: 80%; height:auto;margin-left: 10%; margin-right: 10%;">
+			<input id="idSearch" type="text" placeholder="Search" />
+			<button id="idGo">Go</button>
+			<button id="idShowAll" onclick="isShowAllData(true)">Show All</button>
+		</div>
+		
+		<div id="idSearchMsg" style="width: 80%; height:auto;margin-left: 10%; margin-right: 10%;">
+			<h3 style="color: green;">Please enter text to Search ...</h3>
+		</div>
+		
+		<div>
+			<table border="1" style="width: 80%; height:auto;margin-left: 10%; margin-right: 10%;">
+				<tr style="background-color: #e5e5e5;">
+					<th style="width: 200px; height: 40px;">Name</th>
+					<th style="width: 200px; height: 40px;">Time Slot</th>
+					<th style="width: 200px; height: 40px;">Period</th>
+				</tr>
+			</table>
+		</div>
+
+		<div id="idDivOne" style="display: block; width: 80%; height:auto;margin-left: 10%; margin-right: 10%;">
+			<table id="idTableTag" border="1" style="width: 80%; height:auto;margin-left: 10%; margin-right: 10%;">
+			</table>
+
+		</div>
+
+
+		<div id="idDivTwo" style="display: none; width: 80%; height:auto;margin-left: 10%; margin-right: 10%;">
+			<table id="idTableTwoTag" border="1" style="width: 80%; height:auto;margin-left: 10%; margin-right: 10%;">
+			</table>
+
+		</div>
+	
+
+	</article>
+
+</main>
+
+</body>
+<script>
+
+var idDivOne = document.getElementById("idDivOne");
+var idDivTwo = document.getElementById("idDivTwo");
+var searchTextField = document.getElementById("idSearch");
+var searchBtn = document.getElementById("idGo");
+var body = document.getElementById("idBody");
+var tableMain = document.getElementById("idTableTag");
+var tableTwoMain = document.getElementById("idTableTwoTag");
+var row = document.createElement("tr");
+var nameCol = document.createElement("td");
+var periodCol = document.createElement("td");
+var timeSlotCol = document.createElement("td");
+var idSearchMsg = document.getElementById("idSearchMsg");
+
+
+var jsonData = [
+	{
+		"name": "Mangeshsinh Shinde, Rupaliveera Mangaonkar, Vaishaliveera Mulye",
+		"time_slot": "3.20 - 4.20",
+		"period": "Morning"
+	},
+	{
+		"name": "Sureshsinh Tawde, Vaishaliveera Kelshikar",
+		"time_slot": "4.20 - 5.20",
+		"period": "Morning"
+	},
+	{
+		"name": "Sangeetaveera Bingi, Saurabhsinh Vishwakarma, Mandakiniveera Gaikwad",
+		"time_slot": "5.20 - 6.20",
+		"period": "Morning"
+	},
+	{
+		"name": "Premsinh Vishwakarma, Prashantsinh Surve",
+		"time_slot": "6.20 - 7.20",
+		"period": "Morning"
+	},
+	{
+		"name": "Artiveera Vishwakarma, Rishabhsinh Vishwakarma, Kavitaveera Mane, Sanjeevaniveera Shivalkar",
+		"time_slot": "7.20 - 8.20",
+		"period": "Morning"
+	},
+	{
+		"name": "Jailaxmiveera Pimple, Shrutiveera Jadhav",
+		"time_slot": "8.20 - 9.20",
+		"period": "Morning"
+	},
+	{
+		"name": "Sanjeevaniveera Shivalkar, Shubhangiveera Malekar",
+		"time_slot": "9.20 - 10.20",
+		"period": "Morning"
+	},
+	{
+		"name": "Poojaveera Patil",
+		"time_slot": "10.20 - 11.20",
+		"period": "Morning"
+	},
+	{
+		"name": "Shilpaveera Tawde, Krishnasinh Desai, Shwetaliveera Khadapkar",
+		"time_slot": "11.20 - 12.20",
+		"period": "Afternoon"
+	},
+	{
+		"name": "Manishaveera Gurav",
+		"time_slot": "12.20 - 13.20",
+		"period": "Afternoon"
+	},
+	{
+		"name": "Vijayaveera Jadhav, Atulsinh Jadhav, Pratikshaveera Patil",
+		"time_slot": "13.20 - 14.20",
+		"period": "Afternoon"
+	},
+	{
+		"name": "Vilassinh Mulye, Aparnaveera Deore",
+		"time_slot": "14.20 - 15.20",
+		"period": "Afternoon"
+	},
+	{
+		"name": "Madhuriveera Adavde",
+		"time_slot": "15.20 - 16.20",
+		"period": "Evening"
+	},
+	{
+		"name": "Sheetalveera Bakalkar",
+		"time_slot": "16.20 - 17.20",
+		"period": "Evening"
+	},
+	{
+		"name": "Artiveera Bane, Aparnaveera Deore",
+		"time_slot": "17.20 - 18.20",
+		"period": "Evening"
+	},
+	{
+		"name": "Bhaktiveera Khamkar",
+		"time_slot": "18.20 - 19.20",
+		"period": "Evening"
+	},
+	{
+		"name": "Pradnyaveera Nikhal",
+		"time_slot": "19.20 - 20.20",
+		"period": "Evening"
+	},
+	{
+		"name": "Sangeetaveera Mane",
+		"time_slot": "20.20 - 21.20",
+		"period": "Night"
+	},
+	{
+		"name": "Vidyaveera Phatak",
+		"time_slot": "21.20 - 22.20",
+		"period": "Night"
+	},
+	{
+		"name": "Ajaysinh Mundhe, Bhartiveera Kamerkar",
+		"time_slot": "22.20 - 23.20",
+		"period": "Night"
+	},
+	{
+		"name": "Vishwassinh Bhosle, Pranaliveera Bhosle, Priyankaveera Sawant",
+		"time_slot": "23.20 - 00.20",
+		"period": "Night"
+	},
+	{
+		"name": "Santoshsinh Potle, Aparnaveera Deore",
+		"time_slot": "00.20 - 01.20",
+		"period": "Night"
+	},
+	{
+		"name": "Bharatsinh Bhoinkar",
+		"time_slot": "01.20 - 02.20",
+		"period": "Night"
+	},
+	{
+		"name": "Samirsinh Satam",
+		"time_slot": "02.20 - 3.20",
+		"period": "Night"
+	},
+];
+
+function displayAllData(isShown) {
+	
+	
+	if(isShown) {		
+	idSearchMsg.innerHTML = "Please enter text to Search ...";
+	idSearchMsg.style.color = "green";
+	idSearchMsg.style.fontSize = "20px";
+	idSearchMsg.style.marginTop = "10px";
+	idSearchMsg.style.marginBottom = "10px";
+	idSearchMsg.style.fontWeight = "bold";
+		idDivOne.style.display = "block";
+		idDivTwo.style.display = "none";
+		for(var count=0; count<jsonData.length; count++) {
+			var body = document.getElementById("idBody");
+			var tableMain = document.getElementById("idTableTag");
+			var row = document.createElement("tr");
+
+			var nameCol = document.createElement("td");
+			nameCol.style.width = "200px";
+			var periodCol = document.createElement("td");
+			periodCol.style.width = "200px";
+			var timeSlotCol = document.createElement("td");
+			timeSlotCol.style.width = "200px";
+			nameCol.style.textAlign="center";
+			timeSlotCol.style.textAlign="center";
+			periodCol.style.textAlign="center";
+			nameCol.innerHTML = jsonData[count]["name"];
+			timeSlotCol.innerHTML = jsonData[count]["time_slot"];
+			periodCol.innerHTML = jsonData[count]["period"];
+			row.appendChild(nameCol);
+			row.appendChild(timeSlotCol);
+			row.appendChild(periodCol);
+			tableMain.appendChild(row);
+			body.appendChild(tableMain);
+
+		}
+		searchTextField.value = "";
+	}
+	
+
+}
+
+var showAllData = document.getElementById("idShowAll");
+showAllData.onclick = function() {
+	idDivOne.style.display = "block";
+	idDivTwo.style.display = "none";
+	tableMain.innerHTML = "";
+	tableTwoMain.innerHTML = "";
+	displayAllData(true);
+	
+};
+
+searchBtn.onclick = function() {
+	if(searchTextField.value.trim == "" || searchTextField.value.trim == " ") {
+		idSearchMsg.style.display = "none";
+	} else {
+		idSearchMsg.style.display = "block";
+	}
+	
+	idDivOne.style.display = "none";
+	idDivTwo.style.display = "block";
+	tableMain.innerHTML = "";
+	tableTwoMain.innerHTML = "";	
+	nameCol.innerHTML = "";
+	timeSlotCol.innerHTML = "";
+	periodCol.innerHTML = "";
+	displayAllData(false);
+	var filteredData = jsonData.filter(item => item.name.toLowerCase().includes(searchTextField.value.toLowerCase()) || 
+						   item.time_slot.toLowerCase().includes(searchTextField.value.toLowerCase()) ||
+						   item.period.toLowerCase().includes(searchTextField.value.toLowerCase()));
+	console.log(filteredData.length);
+
+
+if(filteredData.length > 0) {
+for(var count=0; count<filteredData.length; count++) {
+	nameCol.style.textAlign="center";	
+	timeSlotCol.style.textAlign="center";
+	periodCol.style.textAlign="center";
+
+	nameCol.style.width = "200px";
+	periodCol.style.width = "200px";
+	timeSlotCol.style.width = "200px";
+
+
+	nameCol.innerHTML += "<br>" + filteredData[count]["name"] + "<br><br>";
+	timeSlotCol.innerHTML += "<br>" + filteredData [count]["time_slot"] + "<br><br>";
+	periodCol.innerHTML += "<br>" + filteredData [count]["period"] + "<br><br>";
+	row.appendChild(nameCol);
+	row.appendChild(timeSlotCol);
+	row.appendChild(periodCol);
+	tableTwoMain.appendChild(row);
+	body.appendChild(tableTwoMain);	
+}
+
+} else {
+	idSearchMsg.innerHTML = "No Record Found";
+	idSearchMsg.style.color = "green";
+	idSearchMsg.style.fontSize = "20px";
+	idSearchMsg.style.marginTop = "10px";
+	idSearchMsg.style.marginBottom = "10px";}
+	idSearchMsg.style.fontWeight = "bold";
+	searchTextField.value = "";
+}
+
+window.onload = function() {	
+	displayAllData(true);
+}
+</script>
+</html>
